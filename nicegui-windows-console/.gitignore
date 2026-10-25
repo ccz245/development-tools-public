@@ -1,5 +1,0 @@
-# Machine-specific settings; config.example.json is the tracked template
-config.local.json
-
-# NiceGUI's own storage folder, created in the working directory
-.nicegui/

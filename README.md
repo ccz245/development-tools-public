@@ -15,13 +15,11 @@ you know which version you are running.
 
 ## Tools
 
-| Folder | What it is |
-|---|---|
-| [nicegui-windows-console](nicegui-windows-console/README.md) | One-window dashboard for a Windows dev laptop: Claude usage, power, machine load, world clocks, tasks, transcripts, hotstrings, launchpad. `uv run console.py` |
+None yet. Each tool will be a folder at the root with its own README.
 
 ## Structure
 
 ```
 README.md  AGENTS.md  CLAUDE.md  DESIGN.md  TODO.md  CHANGELOG.md
-nicegui-windows-console/   one folder per tool
+<tool>/   one folder per tool, when there are any
 ```
