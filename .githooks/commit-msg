@@ -1,0 +1,50 @@
+#!/bin/sh
+# Blocks a commit that would publish private details: an author email that is not
+# the GitHub noreply address, a real email address in the added lines or the
+# message, or any term on the local denylist. The denylist lives outside the repo
+# because it names exactly what must stay private.
+
+denylist="${DEVTOOLS_DENYLIST:-$HOME/.config/development-tools-public/denylist.txt}"
+fail=0
+
+author_email=$(git var GIT_AUTHOR_IDENT | sed 's/.*<\(.*\)>.*/\1/')
+case "$author_email" in
+  *@users.noreply.github.com) ;;
+  *)
+    echo "blocked: author email <$author_email> is not your GitHub noreply address" >&2
+    fail=1
+    ;;
+esac
+
+added=$(git diff --cached --no-color -U0 | grep '^+' | grep -v '^+++')
+message=$(grep -v '^#' "$1")
+text=$(printf '%s\n%s\n' "$added" "$message")
+
+emails=$(printf '%s\n' "$text" \
+  | grep -oE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' \
+  | grep -viE 'noreply|@example\.(com|org|net)$' | sort -u)
+if [ -n "$emails" ]; then
+  echo "blocked: email addresses in the change or message:" >&2
+  printf '  %s\n' $emails >&2
+  fail=1
+fi
+
+if [ -f "$denylist" ]; then
+  # Fixed strings, one per line; blank lines and # comments are ignored.
+  patterns=$(tr -d '\r' < "$denylist" | grep -v -e '^#' -e '^[[:space:]]*$')
+  if [ -n "$patterns" ]; then
+    hits=$(printf '%s\n' "$text" | grep -iwoF "$patterns" | sort -uf)
+    if [ -n "$hits" ]; then
+      echo "blocked: denylisted terms in the change or message:" >&2
+      printf '%s\n' "$hits" | sed 's/^/  /' >&2
+      fail=1
+    fi
+  fi
+else
+  echo "warning: no denylist at $denylist, so client names are not checked" >&2
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo "Commit stopped. This repo is public; remove the details above and retry." >&2
+fi
+exit $fail
