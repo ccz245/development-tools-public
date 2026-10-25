@@ -1,0 +1,11 @@
+# Per-environment config and secrets never leave this machine
+*.local.*
+.env
+.env.*
+!.env.example
+
+# Build output
+node_modules/
+dist/
+.venv/
+__pycache__/
