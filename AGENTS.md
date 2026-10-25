@@ -7,8 +7,13 @@ onto machines outside this one.
 
 ```
 README.md  AGENTS.md  CLAUDE.md  DESIGN.md  TODO.md  CHANGELOG.md
-.githooks/commit-msg   Blocks commits carrying private details (see below)
+.githooks/commit-msg       Blocks commits carrying private details (see below)
+.claude/launch.json        Preview configurations for the topics' local servers
+nicegui-windows-console/   Topic: NiceGUI dashboard for a Windows dev laptop (own six docs)
 ```
+
+Each tool is a topic folder at the root holding everything only it uses, with its own
+`AGENTS.md` for what is specific to it.
 
 ## Setting up a clone you will commit from
 

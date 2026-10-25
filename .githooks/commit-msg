@@ -16,7 +16,8 @@ case "$author_email" in
     ;;
 esac
 
-added=$(git diff --cached --no-color -U0 | grep '^+' | grep -v '^+++')
+# Strip the diff's leading plus sign, or CLAUDE.md's one-line pointer reads as an email address.
+added=$(git diff --cached --no-color -U0 | grep '^+' | grep -v '^+++' | sed 's/^+//')
 message=$(grep -v '^#' "$1")
 text=$(printf '%s\n%s\n' "$added" "$message")
 

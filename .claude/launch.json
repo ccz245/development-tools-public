@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "windows-console-demo",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--directory", "nicegui-windows-console", "console.py", "--no-show", "--demo"],
+      "port": 9001
+    },
+    {
+      "name": "windows-console",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--directory", "nicegui-windows-console", "console.py", "--no-show"],
+      "port": 9001
+    }
+  ]
+}

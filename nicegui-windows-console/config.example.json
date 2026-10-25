@@ -1,0 +1,39 @@
+{
+  "_notes": "Defaults. Override any key in config.local.json next to this file (git-ignored); objects merge, lists replace.",
+  "title": "Windows Console",
+  "port": 9001,
+  "window_size": [1480, 1060],
+  "owner_name": "Your Name",
+  "claude": {
+    "log_roots": ["~/.claude/projects", "~/.config/claude/projects"],
+    "credentials": "~/.claude/.credentials.json",
+    "fetch_limits": true
+  },
+  "clocks": {
+    "cities": [
+      {"name": "Vancouver", "tz": "America/Vancouver", "lat": 49.2827, "lon": -123.1207},
+      {"name": "New York", "tz": "America/New_York", "lat": 40.7128, "lon": -74.006},
+      {"name": "London", "tz": "Europe/London", "lat": 51.5072, "lon": -0.1276},
+      {"name": "Tokyo", "tz": "Asia/Tokyo", "lat": 35.6762, "lon": 139.6503}
+    ]
+  },
+  "tasks": {
+    "provider": "auto",
+    "todoist_token_env": "TODOIST_API_TOKEN",
+    "waiting_label": "waiting",
+    "notes_file": "~/Documents/console-tasks.md"
+  },
+  "transcripts": {
+    "path": "",
+    "service_name": "Service",
+    "service_match": ""
+  },
+  "apps": [
+    {"name": "Agent Fleet Manager", "command": [], "cwd": "", "match": "", "console": false},
+    {"name": "Note Taker", "command": [], "cwd": "", "match": "", "console": false}
+  ],
+  "autohotkey": {
+    "exe": "C:/Program Files/AutoHotkey/v2/AutoHotkey64.exe",
+    "script": "%LOCALAPPDATA%/nicegui-windows-console/console.ahk"
+  }
+}
